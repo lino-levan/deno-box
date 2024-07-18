@@ -7,11 +7,11 @@ import { compileCss } from "./css.ts";
 Deno.serve(async (req) => {
   const path = new URL(req.url).pathname;
 
-  if(path === "/tailwind.css") {
+  if (path === "/tailwind.css") {
     return new Response(compileCss(), {
       headers: {
-        "Content-Type": "text/css"
-      }
+        "Content-Type": "text/css",
+      },
     });
   }
 

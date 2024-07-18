@@ -21,7 +21,9 @@ export function App() {
             <p class="px-2 py-1">Deno Box</p>
             {box.fs.ls().map((file) => (
               <button
-                class={`text-left pl-4 py-1 hover:bg-gray-200 ${file.name === openFile.value ? "bg-gray-300" : ""}`}
+                class={`text-left pl-4 py-1 hover:bg-gray-200 ${
+                  file.name === openFile.value ? "bg-gray-300" : ""
+                }`}
                 onClick={() => {
                   openFile.value = file.name;
                 }}
@@ -39,8 +41,11 @@ export function App() {
                 value={new TextDecoder().decode(
                   box.fs.readFile(openFile.value),
                 )}
-                onInput={(e)=>{
-                  box.fs.writeFile(openFile.value!, new TextEncoder().encode(e.currentTarget.value))
+                onInput={(e) => {
+                  box.fs.writeFile(
+                    openFile.value!,
+                    new TextEncoder().encode(e.currentTarget.value),
+                  );
                 }}
               />
             )
@@ -54,7 +59,10 @@ export function App() {
           )}
         </div>
         {websiteWidth.value !== null && (
-          <div class="h-full bg-red-100 border-l border-gray-400" style={{ width: websiteWidth.value }}>
+          <div
+            class="h-full bg-red-100 border-l border-gray-400"
+            style={{ width: websiteWidth.value }}
+          >
           </div>
         )}
       </div>

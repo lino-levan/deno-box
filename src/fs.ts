@@ -25,8 +25,8 @@ export class FileSystem {
 
   writeFile(path: string, content: Uint8Array) {
     const file = this.#root.find((f) => f.name === path);
-    if(file) {
-      if("content" in file) {
+    if (file) {
+      if ("content" in file) {
         file.content = content;
       } else {
         throw "aaaaa";
@@ -34,8 +34,8 @@ export class FileSystem {
     } else {
       this.#root.push({
         name: path,
-        content
-      })
+        content,
+      });
     }
   }
 

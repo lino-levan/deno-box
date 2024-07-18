@@ -10,7 +10,7 @@ function toBase64(content: Uint8Array) {
 export class DenoWorker {
   #box: DenoBox;
   #worker: Worker;
-  onprint: (content: string)=>void = ()=>{};
+  onprint: (content: string) => void = () => {};
 
   constructor(box: DenoBox, src: string) {
     this.#box = box;
@@ -28,18 +28,6 @@ export class DenoWorker {
               res(e.data);
             }, { once: true });
           })
-        },
-        readTextFileSync(file) {
-          self.postMessage({
-            type: "readTextFile",
-            content: file
-          });
-          let result = undefined;
-          self.addEventListener("message", (e) => {
-            result = e.data;
-          }, { once: true });
-          while(!result) {}
-          return result;
         },
         exit(num) {
           self.postMessage({
@@ -59,17 +47,19 @@ export class DenoWorker {
       ${src}
     `);
     const base64 = toBase64(source);
-    this.#worker = new Worker(`data:text/javascript;base64,${base64}` ,{
-      type: "module"
-    })
+    this.#worker = new Worker(`data:text/javascript;base64,${base64}`, {
+      type: "module",
+    });
     this.#worker.addEventListener("message", (e) => {
       const type: string = e.data.type;
-      if(type === "print") {
+      if (type === "print") {
         this.onprint(e.data.content.join(" "));
-      } else if(type === "readTextFile") {
-        const file = new TextDecoder().decode(this.#box.fs.readFile(e.data.content));
+      } else if (type === "readTextFile") {
+        const file = new TextDecoder().decode(
+          this.#box.fs.readFile(e.data.content),
+        );
         this.#worker.postMessage(file);
-      } else if(type === "exit") {
+      } else if (type === "exit") {
         this.#worker.terminate();
       }
     });

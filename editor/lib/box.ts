@@ -2,9 +2,18 @@ import { DenoBox } from "../../src/mod.ts";
 
 export const box = new DenoBox();
 
-box.fs.writeFile("hello.ts", new TextEncoder().encode("console.log('Hello world!');"));
-box.fs.writeFile("hello2.ts", new TextEncoder().encode("console.log('Hello world 2!');"));
-box.fs.writeFile("real.ts", new TextEncoder().encode(`const logs = (await Deno.readTextFile("log.txt")).split('\\n');
+box.fs.writeFile(
+  "hello.ts",
+  new TextEncoder().encode("console.log('Hello world!');"),
+);
+box.fs.writeFile(
+  "hello2.ts",
+  new TextEncoder().encode("console.log('Hello world 2!');"),
+);
+box.fs.writeFile(
+  "real.ts",
+  new TextEncoder().encode(
+    `const logs = (await Deno.readTextFile("log.txt")).split('\\n');
 
 let relevant = [];
 
@@ -17,8 +26,13 @@ relevant.sort();
 
 for(const r of relevant) {
 console.log(r);
-}`));
-box.fs.writeFile("log.txt", new TextEncoder().encode(`[15Jul2024 07:26:45.255] [User Authenticator #25/INFO] [net.minecraft.server.network.ServerLoginPacketListenerImpl/]: UUID of player ioBdaSylemertxE is 7aed0a75-9349-4362-9283-bcfdd3b0e80a
+}`,
+  ),
+);
+box.fs.writeFile(
+  "log.txt",
+  new TextEncoder().encode(
+    `[15Jul2024 07:26:45.255] [User Authenticator #25/INFO] [net.minecraft.server.network.ServerLoginPacketListenerImpl/]: UUID of player ioBdaSylemertxE is 7aed0a75-9349-4362-9283-bcfdd3b0e80a
 [15Jul2024 07:26:59.587] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: ioBdaSylemertxE[/73.231.15.211:55415] logged in with entity id 695826 at (-233.5, 44.0, 187.5)
 [15Jul2024 07:26:59.589] [Server thread/INFO] [ModdingLegacy/blue_skies/]: Sending ToolHandleTypeManager to ioBdaSylemertxE
 [15Jul2024 07:26:59.589] [Server thread/INFO] [ModdingLegacy/blue_skies/]: Sending SnowcapOvenFreezingManager to ioBdaSylemertxE
@@ -1894,5 +1908,6 @@ Caused by: java.lang.IllegalStateException: Entity has invalid position
 [15Jul2024 23:50:23.526] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Kinetikid has made the advancement [Diamonds!]
 [15Jul2024 23:53:00.195] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: stellarumsalve lost connection: Disconnected
 [15Jul2024 23:53:00.195] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: stellarumsalve left the game
-[15Jul2024 23:53:00.195] [Server thread/INFO] [xaero.pac.OpenPartiesAndClaims/]: Updating all forceload tickets for 78cca7c2-7bce-4c45-b786-3880d464352a`)
+[15Jul2024 23:53:00.195] [Server thread/INFO] [xaero.pac.OpenPartiesAndClaims/]: Updating all forceload tickets for 78cca7c2-7bce-4c45-b786-3880d464352a`,
+  ),
 );

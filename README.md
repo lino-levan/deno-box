@@ -3,6 +3,7 @@
 Deno in a box... on the web.
 
 ## TODO (Can't do on a plane w/o internet)
+
 - Sync communication between worker and main (SAB? atomics?)
 - Git (Need to drop in isomorphic git in here, that would be great)
 - Non-sucky terminal (ask pichu on what to drop in here)

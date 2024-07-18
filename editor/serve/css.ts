@@ -12,7 +12,7 @@ export function compileCss() {
       exts: [".ts", ".tsx", ".js", ".jsx"],
     })
   ) {
-    if(entry.name === "css.ts") continue;
+    if (entry.name === "css.ts") continue;
     const extension = extname(entry.name);
     const content = Deno.readTextFileSync(entry.path);
     for (
