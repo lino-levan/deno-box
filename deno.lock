@@ -21,6 +21,7 @@
       "jsr:@std/streams@^0.221.0": "jsr:@std/streams@0.221.0",
       "npm:@tailwindcss/oxide@4.0.0-alpha.11": "npm:@tailwindcss/oxide@4.0.0-alpha.11",
       "npm:esbuild@0.20.2": "npm:esbuild@0.20.2",
+      "npm:monaco-editor@0.50.0": "npm:monaco-editor@0.50.0",
       "npm:tailwindcss@4.0.0-alpha.11": "npm:tailwindcss@4.0.0-alpha.11"
     },
     "jsr": {

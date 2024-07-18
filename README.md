@@ -1,6 +1,6 @@
 # Deno Box
 
-Deno in a box... on the web.
+Deno in a box... on the web. Hacked over a plane flight after being nerd sniped.
 
 ## TODO (Can't do on a plane w/o internet)
 
