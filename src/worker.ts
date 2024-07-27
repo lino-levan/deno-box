@@ -35,6 +35,40 @@ export class DenoWorker {
             content: num ?? 0
           });
           while(true) {}
+        },
+        serve(callback) {
+          const port = 80; // TODO(@lino-levan): Randomize port or make it configurable
+          const bc = new BroadcastChannel("box_sw_network_request");
+          bc.addEventListener("message", async (e) => {
+            if(e.data.type === "request") {
+              const reqPayload = e.data.data;
+              const url = new URL(reqPayload.url);
+              const requestPort = parseInt(reqPayload.url.split("/")[4]);
+              __print("Request port", requestPort, port, requestPort === port)
+              if(requestPort !== port) {
+                return;
+              }
+              url.port = requestPort;
+              url.hostname = "localhost";
+              url.pathname = url.pathname.split("/").slice(3).join("/");
+
+              const res = await callback(new Request(url, {
+                method: reqPayload.method,
+                headers: reqPayload.headers,
+                body: reqPayload.body,
+              }));
+              bc.postMessage({
+                id: e.data.id,
+                type: "response",
+                data: {
+                  body: await res.arrayBuffer(),
+                  status: res.status,
+                  statusText: res.statusText,
+                  headers: {... res.headers.entries() },
+                }
+              });
+            }
+          });
         }
       };
 

@@ -1,6 +1,7 @@
 import { useSignal } from "@preact/signals";
 
 import { Terminal } from "./Terminal.tsx";
+import { Browser } from "./Browser.tsx";
 
 import { box } from "../lib/box.ts";
 
@@ -59,11 +60,7 @@ export function App() {
           )}
         </div>
         {websiteWidth.value !== null && (
-          <div
-            class="h-full bg-red-100 border-l border-gray-400"
-            style={{ width: websiteWidth.value }}
-          >
-          </div>
+          <Browser style={{ width: websiteWidth.value }} />
         )}
       </div>
       <div class="w-full flex gap-2 p-1 border-t border-gray-400 bg-gray-200">
