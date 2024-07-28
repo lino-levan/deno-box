@@ -1,7 +1,12 @@
 import { useSignal } from "@preact/signals";
 
-import { Terminal } from "./Terminal.tsx";
+import { Editor } from "./Editor.tsx";
 import { Browser } from "./Browser.tsx";
+import { Terminal } from "./Terminal.tsx";
+
+import IconLayoutSidebar from "icons/layout-sidebar.tsx";
+import IconTerminal2 from "icons/terminal-2.tsx";
+import IconBrowser from "icons/browser.tsx";
 
 import { box } from "../lib/box.ts";
 
@@ -9,7 +14,7 @@ export function App() {
   const openFile = useSignal<string | null>(null);
   const sidebarWidth = useSignal<number | null>(200);
   const terminalHeight = useSignal<number | null>(250);
-  const websiteWidth = useSignal<number | null>(null);
+  const websiteWidth = useSignal<number | null>(600);
 
   return (
     <div class="flex flex-col w-screen h-screen dark:text-white dark:bg-black">
@@ -36,20 +41,7 @@ export function App() {
         )}
         <div class="h-full flex-grow-[1] flex flex-col">
           {openFile.value
-            ? (
-              <textarea
-                class="flex-grow-[1] p-2 border-0 outline-none"
-                value={new TextDecoder().decode(
-                  box.fs.readFile(openFile.value),
-                )}
-                onInput={(e) => {
-                  box.fs.writeFile(
-                    openFile.value!,
-                    new TextEncoder().encode(e.currentTarget.value),
-                  );
-                }}
-              />
-            )
+            ? <Editor openFile={openFile.value} />
             : (
               <div class="flex-grow-[1] p-2">
                 No file selected.
@@ -65,6 +57,7 @@ export function App() {
       </div>
       <div class="w-full flex gap-2 p-1 border-t border-gray-400 bg-gray-200">
         <button
+          class="text-gray-500 hover:text-gray-800 cursor-pointer"
           onClick={() => {
             if (sidebarWidth.value === null) {
               sidebarWidth.value = 200;
@@ -73,10 +66,10 @@ export function App() {
             }
           }}
         >
-          Sidebar
+          <IconLayoutSidebar />
         </button>
         <button
-          class="ml-auto"
+          class="ml-auto text-gray-500 hover:text-gray-800 cursor-pointer"
           onClick={() => {
             if (terminalHeight.value === null) {
               terminalHeight.value = 250;
@@ -85,9 +78,10 @@ export function App() {
             }
           }}
         >
-          Terminal
+          <IconTerminal2 />
         </button>
         <button
+          class="text-gray-500 hover:text-gray-800 cursor-pointer"
           onClick={() => {
             if (websiteWidth.value === null) {
               websiteWidth.value = 600;
@@ -96,7 +90,7 @@ export function App() {
             }
           }}
         >
-          Website
+          <IconBrowser />
         </button>
       </div>
     </div>
